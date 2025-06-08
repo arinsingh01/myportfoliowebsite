@@ -1,0 +1,391 @@
+/**
+ * Dark Mode CSS for Portfolio Website
+ * Contains dark theme styles and rain/thunderstorm effects
+ */
+
+/* Dark Mode Variables */
+:root {
+    --dark-bg: #121212;
+    --dark-surface: #1e1e1e;
+    --dark-primary: #6c8bff;
+    --dark-secondary: #8c96a3;
+    --dark-text: #e0e0e0;
+    --dark-text-secondary: #b0b0b0;
+    --dark-border: #333333;
+    --dark-card: #252525;
+    --dark-hover: #2a2a2a;
+    --dark-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Lightning colors */
+    --lightning-color: rgba(255, 255, 255, 0.8);
+    --thunder-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+    
+    /* Theme Button */
+    --theme-btn-size: 40px;
+    --theme-btn-bg: #2a2a2a;
+    --theme-btn-color: #e0e0e0;
+    --theme-btn-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header Dark Mode */
+body.dark-mode header {
+    background: linear-gradient(to right, rgba(30, 30, 30, 0.95), rgba(42, 42, 42, 0.95));
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 15px var(--dark-shadow);
+}
+
+body.dark-mode .logo {
+    color: var(--dark-primary);
+    text-shadow: 0 0 10px rgba(108, 139, 255, 0.3);
+}
+
+body.dark-mode nav ul li a {
+    color: var(--dark-text);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode nav ul li a:hover {
+    color: var(--dark-primary);
+    background: rgba(108, 139, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Theme Button Dark Mode */
+.theme-toggle {
+    width: var(--theme-btn-size);
+    height: var(--theme-btn-size);
+    border-radius: 50%;
+    background: var(--theme-btn-bg);
+    border: 2px solid var(--dark-primary);
+    color: var(--theme-btn-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: var(--theme-btn-shadow);
+    margin-left: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+    border-color: var(--dark-primary);
+    box-shadow: 0 0 15px var(--dark-primary);
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, var(--dark-primary) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.theme-toggle:hover::before {
+    opacity: 0.2;
+}
+
+.theme-toggle i {
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle.clicked i {
+    transform: scale(0.8) rotate(360deg);
+}
+
+/* Light Mode Theme Button */
+body:not(.dark-mode) .theme-toggle {
+    background: #f0f0f0;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body:not(.dark-mode) .theme-toggle:hover {
+    background: #ffffff;
+    box-shadow: 0 0 15px var(--primary-color);
+}
+
+body:not(.dark-mode) .theme-toggle::before {
+    background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+}
+
+/* Sections Dark Mode */
+body.dark-mode section {
+    background-color: var(--dark-bg);
+}
+
+body.dark-mode .section-title {
+    color: var(--dark-text);
+}
+
+body.dark-mode .section-title::after {
+    background-color: var(--dark-primary);
+}
+
+/* Cards Dark Mode */
+body.dark-mode .project-card,
+body.dark-mode .certificate-card {
+    background-color: var(--dark-card);
+    box-shadow: 0 5px 15px var(--dark-shadow);
+}
+
+body.dark-mode .project-card:hover,
+body.dark-mode .certificate-card:hover {
+    box-shadow: 0 8px 25px var(--dark-shadow);
+}
+
+body.dark-mode .project-card h3,
+body.dark-mode .certificate-card h3,
+body.dark-mode .featured-project-container h3 {
+    color: var(--dark-text);
+}
+
+body.dark-mode .project-card p,
+body.dark-mode .certificate-card p,
+body.dark-mode .featured-project-container p,
+body.dark-mode .featured-project-container li {
+    color: var(--dark-text-secondary);
+}
+
+/* Featured Project Section Dark Mode */
+body.dark-mode #ai-nurse-project {
+    background-color: var(--dark-surface);
+}
+
+body.dark-mode .featured-project-container {
+    background-color: var(--dark-card);
+    box-shadow: 0 5px 15px var(--dark-shadow);
+}
+
+body.dark-mode .featured-project-container .tech-stack span {
+    background-color: var(--dark-primary);
+    color: var(--dark-bg);
+}
+
+body.dark-mode .featured-project-container .project-image {
+    border: 1px solid var(--dark-border);
+}
+
+/* Buttons Dark Mode */
+body.dark-mode .primary-btn {
+    background-color: var(--dark-primary);
+}
+
+body.dark-mode .primary-btn:hover {
+    background-color: #5a79e6;
+}
+
+body.dark-mode .secondary-btn {
+    color: var(--dark-primary);
+    border-color: var(--dark-primary);
+}
+
+body.dark-mode .secondary-btn:hover {
+    background-color: rgba(108, 139, 255, 0.1);
+}
+
+/* Form Elements Dark Mode */
+body.dark-mode input,
+body.dark-mode textarea {
+    background-color: var(--dark-surface);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+body.dark-mode input:focus,
+body.dark-mode textarea:focus {
+    border-color: var(--dark-primary);
+}
+
+/* Footer Dark Mode */
+body.dark-mode footer {
+    background-color: var(--dark-surface);
+    color: var(--dark-text-secondary);
+}
+
+body.dark-mode .social-links a {
+    color: var(--dark-text);
+}
+
+body.dark-mode .social-links a:hover {
+    color: var(--dark-primary);
+}
+
+/* Modal Dark Mode */
+body.dark-mode .modal-content {
+    background-color: var(--dark-card);
+}
+
+body.dark-mode .close {
+    color: var(--dark-text);
+}
+
+/* Dark Mode Toggle Switch */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 26px;
+    position: relative;
+    width: 50px;
+}
+
+.theme-switch input {
+    display: none;
+}
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    background-color: white;
+    bottom: 4px;
+    content: "";
+    height: 18px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 18px;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--dark-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+.theme-switch-wrapper .switch-label {
+    margin-left: 10px;
+    font-size: 14px;
+    color: var(--dark-color);
+    transition: color 0.3s ease;
+}
+
+body.dark-mode .theme-switch-wrapper .switch-label {
+    color: var(--dark-text);
+}
+
+/* Rain Effect */
+.rain-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+body.dark-mode .rain-container {
+    opacity: 1;
+}
+
+.raindrop {
+    position: absolute;
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.7));
+    border-radius: 0 0 5px 5px;
+    opacity: 0.5;
+    animation: rain linear infinite;
+    /* Default animation duration if not set via JavaScript */
+    animation-duration: 1s;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes rain {
+    0% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.5;
+    }
+    90% {
+        opacity: 0.5;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Lightning Effect */
+.lightning {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--lightning-color);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 999;
+    mix-blend-mode: screen;
+}
+
+/* Thunder Sound Indicator */
+.thunder-indicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+body.dark-mode .thunder-indicator {
+    opacity: 1;
+}
+
+.thunder-indicator i {
+    margin-right: 5px;
+}
+
+.thunder-indicator.muted i {
+    color: red;
+}
