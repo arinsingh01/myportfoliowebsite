@@ -15,11 +15,11 @@
     --dark-card: #252525;
     --dark-hover: #2a2a2a;
     --dark-shadow: rgba(0, 0, 0, 0.3);
-    
+
     /* Lightning colors */
     --lightning-color: rgba(255, 255, 255, 0.8);
     --thunder-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
-    
+
     /* Theme Button */
     --theme-btn-size: 40px;
     --theme-btn-bg: #2a2a2a;
@@ -139,27 +139,40 @@ body.dark-mode .section-title::after {
 
 /* Cards Dark Mode */
 body.dark-mode .project-card,
-body.dark-mode .certificate-card {
+body.dark-mode .certificate-card,
+body.dark-mode .experience-card {
     background-color: var(--dark-card);
     box-shadow: 0 5px 15px var(--dark-shadow);
 }
 
 body.dark-mode .project-card:hover,
-body.dark-mode .certificate-card:hover {
+body.dark-mode .certificate-card:hover,
+body.dark-mode .experience-card:hover {
     box-shadow: 0 8px 25px var(--dark-shadow);
 }
 
 body.dark-mode .project-card h3,
 body.dark-mode .certificate-card h3,
+body.dark-mode .experience-card h3,
 body.dark-mode .featured-project-container h3 {
     color: var(--dark-text);
 }
 
 body.dark-mode .project-card p,
 body.dark-mode .certificate-card p,
+body.dark-mode .experience-card p,
+body.dark-mode .experience-card li,
 body.dark-mode .featured-project-container p,
 body.dark-mode .featured-project-container li {
     color: var(--dark-text-secondary);
+}
+
+/* Glassmorphism Dark Mode */
+body.dark-mode .glassmorphism {
+    background-color: rgba(30, 30, 30, 0.4) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Featured Project Section Dark Mode */
@@ -280,11 +293,11 @@ body.dark-mode .close {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: var(--dark-primary);
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(24px);
 }
 
@@ -335,12 +348,15 @@ body.dark-mode .rain-container {
         transform: translateY(-100vh);
         opacity: 0;
     }
+
     10% {
         opacity: 0.5;
     }
+
     90% {
         opacity: 0.5;
     }
+
     100% {
         transform: translateY(100vh);
         opacity: 0;

@@ -3,7 +3,7 @@
  * Handles project and certificate management in the admin panel
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize admin dashboard
     initAdminDashboard();
 });
@@ -15,16 +15,16 @@ function initAdminDashboard() {
         window.location.href = 'index.html';
         return;
     }
-    
+
     // Setup logout button
     setupLogout();
-    
+
     // Setup add project form
     setupAddProjectForm();
-    
+
     // Create edit project modal
     createEditProjectModal();
-    
+
     // Add 3D effects to admin cards
     addEffectsToAdminElements();
 }
@@ -37,14 +37,14 @@ function isAdminLoggedIn() {
 // Setup logout button
 function setupLogout() {
     const logoutBtn = document.getElementById('logout-btn');
-    
+
     if (logoutBtn) {
-        logoutBtn.addEventListener('click', function(e) {
+        logoutBtn.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             // Clear admin logged in flag
             localStorage.removeItem('adminLoggedIn');
-            
+
             // Redirect to home page
             window.location.href = 'index.html';
         });
@@ -54,11 +54,11 @@ function setupLogout() {
 // Setup add project form
 function setupAddProjectForm() {
     const addProjectForm = document.getElementById('add-project-form');
-    
+
     if (addProjectForm) {
-        addProjectForm.addEventListener('submit', function(e) {
+        addProjectForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Get form data
             const projectData = {
                 title: document.getElementById('project-title').value,
@@ -67,16 +67,16 @@ function setupAddProjectForm() {
                 tags: document.getElementById('project-tags').value,
                 link: document.getElementById('project-link').value
             };
-            
+
             // Add project
             projectsManager.addProject(projectData);
-            
+
             // Reset form
             addProjectForm.reset();
-            
+
             // Update project list
             renderAdminProjects();
-            
+
             // Show success message
             alert('Project added successfully!');
         });
@@ -89,7 +89,7 @@ function createEditProjectModal() {
     const modal = document.createElement('div');
     modal.id = 'edit-project-modal';
     modal.className = 'modal';
-    
+
     // Set modal HTML
     modal.innerHTML = `
         <div class="modal-content">
@@ -121,34 +121,34 @@ function createEditProjectModal() {
             </form>
         </div>
     `;
-    
+
     // Add modal to the page
     document.body.appendChild(modal);
-    
+
     // Get the close button
     const closeBtn = modal.querySelector('.close');
-    
+
     // Set up close button click handler
-    closeBtn.addEventListener('click', function() {
+    closeBtn.addEventListener('click', function () {
         modal.style.display = 'none';
     });
-    
+
     // Close modal when clicking outside of it
-    window.addEventListener('click', function(e) {
+    window.addEventListener('click', function (e) {
         if (e.target === modal) {
             modal.style.display = 'none';
         }
     });
-    
+
     // Set up edit form submission
     const editForm = document.getElementById('edit-project-form');
-    
-    editForm.addEventListener('submit', function(e) {
+
+    editForm.addEventListener('submit', function (e) {
         e.preventDefault();
-        
+
         // Get project ID
         const projectId = parseInt(document.getElementById('edit-project-id').value);
-        
+
         // Get form data
         const projectData = {
             title: document.getElementById('edit-project-title').value,
@@ -157,16 +157,16 @@ function createEditProjectModal() {
             tags: document.getElementById('edit-project-tags').value,
             link: document.getElementById('edit-project-link').value
         };
-        
+
         // Update project
         projectsManager.updateProject(projectId, projectData);
-        
+
         // Close modal
         modal.style.display = 'none';
-        
+
         // Update project list
         renderAdminProjects();
-        
+
         // Show success message
         alert('Project updated successfully!');
     });
@@ -176,7 +176,7 @@ function createEditProjectModal() {
 function openEditProjectModal(project) {
     // Get modal
     const modal = document.getElementById('edit-project-modal');
-    
+
     if (modal && project) {
         // Set form values
         document.getElementById('edit-project-id').value = project.id;
@@ -185,7 +185,7 @@ function openEditProjectModal(project) {
         document.getElementById('edit-project-image').value = project.image;
         document.getElementById('edit-project-tags').value = project.tags.join(', ');
         document.getElementById('edit-project-link').value = project.link || '';
-        
+
         // Show modal
         modal.style.display = 'block';
     }
@@ -198,13 +198,13 @@ function addEffectsToAdminElements() {
     if (adminSection) {
         adminSection.classList.add('perspective-container');
     }
-    
+
     // Add floating animation to section titles
     const sectionTitles = document.querySelectorAll('.section-title');
     sectionTitles.forEach(title => {
         title.classList.add('float');
     });
-    
+
     // Add pulse animation to buttons
     const buttons = document.querySelectorAll('.primary-btn');
     buttons.forEach(button => {

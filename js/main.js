@@ -3,7 +3,7 @@
  * Handles site initialization, smooth scrolling, contact form, and 3D effects
  */
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Initialize the site
     initSite();
 });
@@ -11,13 +11,13 @@ document.addEventListener('DOMContentLoaded', function() {
 // Setup featured project images with smooth pop-up effect
 function setupFeaturedProjectImages() {
     const featuredProjects = document.querySelectorAll('.featured-project');
-    
+
     // Create an Intersection Observer to detect when featured projects are in view
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             // Get the project image container
             const imageContainer = entry.target.querySelector('.project-image-container');
-            
+
             if (entry.isIntersecting) {
                 // When the project is in view, add the pop-up class
                 if (imageContainer) {
@@ -36,7 +36,7 @@ function setupFeaturedProjectImages() {
         threshold: 0.3, // Trigger when 30% of the element is visible
         rootMargin: '0px 0px -100px 0px' // Adjust the bottom margin to trigger earlier
     });
-    
+
     // Observe each featured project
     featuredProjects.forEach(project => {
         observer.observe(project);
@@ -47,16 +47,68 @@ function setupFeaturedProjectImages() {
 function initSite() {
     // Setup smooth scrolling for navigation links
     setupSmoothScrolling();
-    
+
     // Setup contact form submission
     setupContactForm();
-    
+
     // Setup admin login functionality
     setupAdminLogin();
-    
+
     // Check if user is logged in as admin
     checkAdminStatus();
-    
+
+    // Initialize AOS
+    if (typeof AOS !== 'undefined') {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false,
+            offset: 50
+        });
+    }
+
+    // Initialize Vanta.js
+    if (typeof VANTA !== 'undefined') {
+        // Hero section effect
+        if (document.querySelector('#home')) {
+            VANTA.NET({
+                el: "#home",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x4a6bff,
+                backgroundColor: 0x050b14,
+                points: 12.00,
+                maxDistance: 22.00,
+                spacing: 20.00
+            });
+        }
+
+        // Contact section lower 3D effect
+        if (document.querySelector('#contact')) {
+            VANTA.WAVES({
+                el: "#contact",
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x0a1930,      // Deep blue wave
+                shininess: 35.00,     // Slight gloss
+                waveHeight: 15.00,    // Dramatic wave heights
+                waveSpeed: 1.00,
+                zoom: 0.9           // Pull back slightly for depth
+            });
+        }
+    }
+
     // Add 3D effects and animations
     add3DEffectsAndAnimations();
 }
@@ -64,14 +116,14 @@ function initSite() {
 // Setup smooth scrolling for navigation links
 function setupSmoothScrolling() {
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
-    
+
     navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
-            
+
             const targetId = this.getAttribute('href');
             const targetElement = document.querySelector(targetId);
-            
+
             if (targetElement) {
                 window.scrollTo({
                     top: targetElement.offsetTop - 70, // Adjust for header height
@@ -85,29 +137,29 @@ function setupSmoothScrolling() {
 // Setup contact form submission with EmailJS
 function setupContactForm() {
     const contactForm = document.getElementById('contact-form');
-    
+
     // Initialize EmailJS with public key
-    (function() {
+    (function () {
         // Replace 'YOUR_PUBLIC_KEY' with your actual EmailJS Public Key
-        emailjs.init("YOUR_PUBLIC_KEY"); 
+        emailjs.init("YOUR_PUBLIC_KEY");
     })();
-    
+
     if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Show loading state
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Sending...';
             submitBtn.classList.add('sending');
-            
+
             // Get form data
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
+
             // Prepare template parameters
             const templateParams = {
                 from_name: name,
@@ -115,7 +167,7 @@ function setupContactForm() {
                 to_email: 'singharin.02@gmail.com', // Replace with your recipient email if different
                 message: message
             };
-            
+
             // Create a feedback element for status messages
             let feedbackEl = document.getElementById('form-feedback');
             if (!feedbackEl) {
@@ -123,20 +175,20 @@ function setupContactForm() {
                 feedbackEl.id = 'form-feedback';
                 contactForm.appendChild(feedbackEl);
             }
-            
+
             // Send email using EmailJS
             // Create a service at https://dashboard.emailjs.com/admin
             // Create a template at https://dashboard.emailjs.com/admin/templates
             // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual EmailJS Service ID and Template ID
             emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
-                .then(function(response) {
+                .then(function (response) {
                     console.log('SUCCESS!', response.status, response.text);
                     // Show success message
                     feedbackEl.className = 'success-message';
                     feedbackEl.textContent = `Thank you for your message, ${name}! I will get back to you soon.`;
                     // Reset the form
                     contactForm.reset();
-                    
+
                     // Hide success message after 5 seconds
                     setTimeout(() => {
                         feedbackEl.classList.add('fade-out');
@@ -146,12 +198,12 @@ function setupContactForm() {
                         }, 500);
                     }, 5000);
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log('FAILED...', error);
                     // Show error message
                     feedbackEl.className = 'error-message';
                     feedbackEl.textContent = 'Oops! There was a problem sending your message. Please try again later.';
-                    
+
                     // Hide error message after 5 seconds
                     setTimeout(() => {
                         feedbackEl.classList.add('fade-out');
@@ -161,7 +213,7 @@ function setupContactForm() {
                         }, 500);
                     }, 5000);
                 })
-                .finally(function() {
+                .finally(function () {
                     // Reset button state
                     submitBtn.disabled = false;
                     submitBtn.textContent = originalBtnText;
@@ -175,10 +227,10 @@ function setupContactForm() {
 function setupAdminLogin() {
     // Get the admin link in the navigation
     const adminLink = document.getElementById('admin-link');
-    
+
     // If admin link exists, set up click handler
     if (adminLink) {
-        adminLink.addEventListener('click', function(e) {
+        adminLink.addEventListener('click', function (e) {
             // If not logged in, show login modal
             if (!isAdminLoggedIn()) {
                 e.preventDefault();
@@ -187,49 +239,49 @@ function setupAdminLogin() {
             // If logged in, the link works normally and goes to admin.html
         });
     }
-    
+
     // Get the admin login modal
     const adminModal = document.getElementById('admin-modal');
-    
+
     // If modal exists, set up close button
     if (adminModal) {
         // Get the close button
         const closeBtn = adminModal.querySelector('.close');
-        
+
         // Set up close button click handler
         if (closeBtn) {
-            closeBtn.addEventListener('click', function() {
+            closeBtn.addEventListener('click', function () {
                 adminModal.style.display = 'none';
             });
         }
-        
+
         // Close modal when clicking outside of it
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', function (e) {
             if (e.target === adminModal) {
                 adminModal.style.display = 'none';
             }
         });
-        
+
         // Set up login form submission
         const loginForm = document.getElementById('admin-login-form');
-        
+
         if (loginForm) {
-            loginForm.addEventListener('submit', function(e) {
+            loginForm.addEventListener('submit', function (e) {
                 e.preventDefault();
-                
+
                 // Get form data
                 const username = document.getElementById('username').value;
                 const password = document.getElementById('password').value;
-                
+
                 // Check credentials (in a real app, this would be done on the server)
                 // For demo purposes, we're using a simple check
                 if (username === 'admin' && password === 'password') {
                     // Set admin logged in flag in localStorage
                     localStorage.setItem('adminLoggedIn', 'true');
-                    
+
                     // Close the modal
                     adminModal.style.display = 'none';
-                    
+
                     // Redirect to admin page
                     window.location.href = 'admin.html';
                 } else {
@@ -249,7 +301,7 @@ function checkAdminStatus() {
             adminLink.style.display = 'block';
         }
     }
-    
+
     // If on admin page but not logged in, redirect to home page
     if (window.location.pathname.includes('admin.html') && !isAdminLoggedIn()) {
         window.location.href = 'index.html';
@@ -263,35 +315,35 @@ function isAdminLoggedIn() {
 
 // Add 3D effects and animations to elements
 function add3DEffectsAndAnimations() {
-    // Add 3D effect to project cards
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
+    // Add 3D effect to project cards and experience cards
+    const cards = document.querySelectorAll('.project-card, .experience-card');
+    cards.forEach(card => {
         card.classList.add('card-3d');
-        
+
         // Add tilt effect on mouse movement
         card.addEventListener('mousemove', handleTilt);
         card.addEventListener('mouseleave', resetTilt);
     });
-    
+
     // Setup featured project image pop-up effect
     setupFeaturedProjectImages();
-    
+
     // Add 3D effect to certificate cards with staggered rocket animations
     const certificateCards = document.querySelectorAll('.certificate-card');
     certificateCards.forEach((card, index) => {
         card.classList.add('card-3d');
-        
+
         // Add tilt effect on mouse movement
         card.addEventListener('mousemove', handleTilt);
         card.addEventListener('mouseleave', resetTilt);
-        
+
         // Initially hide the cards
         card.style.opacity = '0';
-        
+
         // Add rocket animations to certificate cards with staggered delays
         setTimeout(() => {
             card.style.opacity = '1';
-            
+
             // Alternate between left, center, and right rocket animations
             if (index % 3 === 0) {
                 card.classList.add('rocket-left');
@@ -302,31 +354,31 @@ function add3DEffectsAndAnimations() {
             }
         }, 500 + (index * 150)); // Staggered delay for each card
     });
-    
+
     // Add floating animation to section titles
     const sectionTitles = document.querySelectorAll('.section-title');
     sectionTitles.forEach(title => {
         title.classList.add('float');
     });
-    
+
     // Add pulse animation to buttons
     const buttons = document.querySelectorAll('.primary-btn');
     buttons.forEach(button => {
         button.classList.add('pulse');
     });
-    
+
     // Add 3D effect to profile image
     const profileImg = document.querySelector('.about-image img');
     if (profileImg) {
         profileImg.classList.add('rotate-on-scroll');
     }
-    
+
     // Add highlight effect to hero section text
     const heroHeadings = document.querySelectorAll('.hero-content h1, .hero-content h2');
     heroHeadings.forEach(heading => {
         heading.classList.add('highlight-text');
     });
-    
+
     // Add staggered entry to hero elements
     const heroElements = document.querySelectorAll('.hero-content > *');
     heroElements.forEach((element, index) => {
@@ -338,13 +390,13 @@ function add3DEffectsAndAnimations() {
             element.style.animationDelay = `${index * 0.15}s`;
         }, 300 + (index * 100));
     });
-    
+
     // Smooth fade-in effect for hero section
     setTimeout(() => {
         heroHeadings.forEach(heading => {
             heading.style.opacity = '0';
             heading.style.transition = 'opacity 0.5s ease';
-            
+
             setTimeout(() => {
                 heading.style.opacity = '1';
             }, 300);
@@ -358,22 +410,22 @@ function handleTilt(e) {
     const cardRect = card.getBoundingClientRect();
     const cardCenterX = cardRect.left + cardRect.width / 2;
     const cardCenterY = cardRect.top + cardRect.height / 2;
-    
+
     // Calculate mouse position relative to card center
     const mouseX = e.clientX - cardCenterX;
     const mouseY = e.clientY - cardCenterY;
-    
-    // Calculate rotation angles (limited to +/- 10 degrees)
-    const rotateY = mouseX * 0.05;
-    const rotateX = -mouseY * 0.05;
-    
-    // Apply transform
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
+
+    // Increased multipliers for a much deeper and more obvious 3D effect
+    const rotateY = mouseX * 0.08;
+    const rotateX = -mouseY * 0.08;
+
+    // Apply transform with a deeper 1500px perspective
+    card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.08, 1.08, 1.08)`;
 }
 
 // Reset tilt effect when mouse leaves
 function resetTilt() {
-    this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    this.style.transform = 'perspective(1500px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
 }
 
 // Open admin login modal
@@ -385,7 +437,7 @@ function openAdminLoginModal() {
 }
 
 // Add a keyboard shortcut for admin login (Ctrl+Shift+A)
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     // Check for Ctrl+Shift+A
     if (e.ctrlKey && e.shiftKey && e.key === 'A') {
         e.preventDefault();

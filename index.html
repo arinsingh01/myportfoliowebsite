@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,10 @@
     <link rel="stylesheet" href="css/effects.css">
     <link rel="stylesheet" href="css/dark-mode.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
+
 <body>
     <!-- Header Section -->
     <header>
@@ -16,8 +20,9 @@
             <div class="logo">Arin Singh</div>
             <nav>
                 <ul>
-                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#home">Home</a></li>
                     <li><a href="#about">About</a></li>
+                    <li><a href="#experience">Experience</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#certificates">Certificates</a></li>
                     <li><a href="#contact">Contact</a></li>
@@ -50,15 +55,18 @@
     <!-- About Section -->
     <section id="about" class="about-section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title" data-aos="fade-up">About Me</h2>
             <div class="about-content">
-                <div class="profile-image">
+                <div class="profile-image" data-aos="fade-right">
                     <img src="images/dp.png" alt="Arin Singh" class="glow-effect">
                 </div>
                 <div class="about-text">
-                    <p>I'm Arin Singh, a B.Tech student specializing in Computer Science with a focus on IoT. I'm deeply interested in Artificial Intelligence, Web Development, and Cloud Computing.</p>
-                    <p>IoT & Cloud computing fascinate me, while AI and Web development provide me with revenue opportunities. When I have a task, I am determined to complete it.</p>
-                    <p>Currently learning Industry Level Cloud Computing and looking to collaborate on AI-based projects and website development.</p>
+                    <p>I'm Arin Singh, a B.Tech student specializing in Computer Science with a focus on IoT. I'm deeply
+                        interested in Artificial Intelligence, Web Development, and Cloud Computing.</p>
+                    <p>IoT & Cloud computing fascinate me, while AI and Web development provide me with revenue
+                        opportunities. When I have a task, I am determined to complete it.</p>
+                    <p>Currently learning Industry Level Cloud Computing and looking to collaborate on AI-based projects
+                        and website development.</p>
                     <div class="skills">
                         <h3>My Skills</h3>
                         <div class="skill-tags">
@@ -74,21 +82,54 @@
         </div>
     </section>
 
+    <!-- Experience Section -->
+    <section id="experience" class="experience-section perspective-container">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card card-3d glassmorphism" data-aos="fade-up" data-aos-delay="100">
+                    <div class="exp-header">
+                        <div class="exp-title">
+                            <h3>Software Engineer Intern</h3>
+                            <h4 class="highlight-text">Roadzen</h4>
+                        </div>
+                        <div class="exp-meta">
+                            <span class="exp-duration"><i class="far fa-calendar-alt"></i> 3 Months</span>
+                            <span class="exp-location"><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        </div>
+                    </div>
+                    <div class="exp-body">
+                        <ul class="exp-list">
+                            <li>Engineered 12+ React components using Redux Saga and Material UI, improving UI
+                                modularity & maintainability.</li>
+                            <li>Integrated RESTful Node.js APIs enabling real-time backend communication across multiple
+                                modules.</li>
+                            <li>Managed 20+ feature branches using Git, handled pull requests, code reviews, and merge
+                                conflict resolution in Sprint cycles.</li>
+                            <li>Maintained structured commit history and version tagging for production-safe deployment.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Projects Section -->
     <section id="projects" class="projects-section perspective-container">
         <div class="container">
-            <h2 class="section-title">My Projects</h2>
-            <div class="projects-grid" id="projects-container">
+            <h2 class="section-title" data-aos="fade-up">My Projects</h2>
+            <div class="projects-grid" id="projects-container" data-aos="fade-up" data-aos-delay="100">
                 <!-- Projects will be loaded dynamically from projects.js with target="_blank" -->
             </div>
         </div>
     </section>
-    
+
     <!-- AI Nurse Assistant Robot Project Section -->
     <section id="ai-nurse-project" class="section">
         <div class="container">
-            <h2 class="section-title">Featured Project: AI Nurse Assistant Robot</h2>
-            <div id="ai-nurse-detail" class="featured-project-container">
+            <h2 class="section-title" data-aos="fade-up">Featured Project: AI Nurse Assistant Robot</h2>
+            <div id="ai-nurse-detail" class="featured-project-container" data-aos="zoom-in">
                 <!-- AI Nurse project details will be loaded dynamically -->
             </div>
         </div>
@@ -97,8 +138,8 @@
     <!-- Certificates Section -->
     <section id="certificates" class="certificates-section perspective-container">
         <div class="container">
-            <h2 class="section-title">My Certificates</h2>
-            <div class="certificates-grid" id="certificates-container">
+            <h2 class="section-title" data-aos="fade-up">My Certificates</h2>
+            <div class="certificates-grid" id="certificates-container" data-aos="fade-up" data-aos-delay="100">
                 <!-- Certificates will be loaded dynamically from certificates.js -->
             </div>
         </div>
@@ -107,23 +148,24 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-title">Contact Me</h2>
+            <h2 class="section-title" data-aos="fade-up">Contact Me</h2>
             <div class="contact-content">
-                <div class="contact-info">
+                <div class="contact-info" data-aos="fade-right">
                     <div class="contact-item">
                         <i class="fas fa-envelope"></i>
                         <p>Singharin.02@gmail.com</p>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-linkedin"></i>
-                        <p><a href="https://www.linkedin.com/in/arin-singh-630b08272" target="_blank">in/arin-singh-630b08272</a></p>
+                        <p><a href="https://www.linkedin.com/in/arin-singh-630b08272"
+                                target="_blank">in/arin-singh-630b08272</a></p>
                     </div>
                     <div class="contact-item">
                         <i class="fab fa-github"></i>
                         <p><a href="https://github.com/arinsingh01" target="_blank">github.com/arinsingh01</a></p>
                     </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form" data-aos="fade-left">
                     <form id="contact-form">
                         <div class="form-group">
                             <input type="text" id="name" name="name" placeholder="Your Name" required>
@@ -147,7 +189,8 @@
             <div class="footer-content">
                 <p>&copy; 2023 Arin Singh. All Rights Reserved.</p>
                 <div class="social-links">
-                    <a href="https://www.linkedin.com/in/arin-singh-630b08272" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://www.linkedin.com/in/arin-singh-630b08272" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
                     <a href="https://github.com/arinsingh01" target="_blank"><i class="fab fa-github"></i></a>
                 </div>
             </div>
@@ -173,12 +216,21 @@
 
     <!-- EmailJS Library -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    
+
+    <!-- AOS Library -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Three.js & Vanta.js for 3D Background -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
+
     <!-- JavaScript -->
-    <script src="js/projects.js"></script>
-    <script src="js/certificates.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/dark-mode.js"></script>
-    <script src="js/ai-nurse.js"></script>
+    <script src="js/projects.js?v=1.1"></script>
+    <script src="js/certificates.js?v=1.1"></script>
+    <script src="js/main.js?v=1.1"></script>
+    <script src="js/dark-mode.js?v=1.1"></script>
+    <script src="js/ai-nurse.js?v=1.1"></script>
 </body>
+
 </html>
